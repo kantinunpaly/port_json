@@ -144,3 +144,32 @@ document.getElementById('download-cv').addEventListener('click', function(event)
     a.click();
     document.body.removeChild(a);
 });
+// ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+function appendData(data) {
+    document.querySelector('.title1').innerText = data.title1;
+    document.querySelector('.header').innerText = data.header;
+    document.querySelector('.title2').innerText = data.title2;
+}
+
+// Function to append social links
+function appendSocialLinks(socialData) {
+    const socialContainer = document.querySelector('.social');
+    socialData.social_links.forEach(link => {
+        const a = document.createElement('a');
+        a.href = link.url;
+        a.alt = link.platform;
+        a.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16"><path d="${link.icon}"/></svg>`;
+        socialContainer.appendChild(a);
+    });
+}
+
+// Fetch and display data
+fetch('assets/section1/info.json')
+    .then(response => response.json())
+    .then(data => appendData(data))
+    .catch(err => console.error('Error loading info:', err));
+
+fetch('assets/section1/social.json')
+    .then(response => response.json())
+    .then(data => appendSocialLinks(data))
+    .catch(err => console.error('Error loading social links:', err));
