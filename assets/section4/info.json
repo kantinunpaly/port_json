@@ -1,0 +1,45 @@
+{
+  "portfolio": {
+    "title": "Portfolio",
+    "description": "These are the latest and standout projects in various areas, including UX/UI design and front-end development. To view more of my work, please click the link below.",
+    "githubLink": "https://github.com/kantinunpaly",
+    "wrappers": [
+      {
+        "id": "1",
+        "image": "hovermodal1.png",
+        "title": "Projects 1",
+        "description": "Lorem ipsum dolor sit amet, consectetur"
+      },
+      {
+        "id": "2",
+        "image": "hovermodal2.png",
+        "title": "Projects 2",
+        "description": "Lorem ipsum dolor sit amet, consectetur"
+      },
+      {
+        "id": "3",
+        "image": "hovermodal3.png",
+        "title": "Projects 3",
+        "description": "Application Food Delivery"
+      },
+      {
+        "id": "4",
+        "image": "1crop.png",
+        "title": "Projects 4",
+        "description": "Lorem ipsum dolor sit amet, consectetur"
+      },
+      {
+        "id": "5",
+        "image": "hovermodal1.png",
+        "title": "Projects 5",
+        "description": "Lorem ipsum dolor sit amet, consectetur"
+      },
+      {
+        "id": "6",
+        "image": "hovermodal1.png",
+        "title": "Projects 6",
+        "description": "Lorem ipsum dolor sit amet, consectetur"
+      }
+    ]
+  }
+}

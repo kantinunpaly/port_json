@@ -134,7 +134,7 @@ document.getElementById('download-cv').addEventListener('click', function(event)
     event.preventDefault(); // ป้องกันการดำเนินการเริ่มต้นของลิงก์
     var url = this.href;
     // เปิดแท็บใหม่
-    window.open(url, '_blank');
+
 
     // สร้างลิงก์ใหม่เพื่อดาวน์โหลดไฟล์
     var a = document.createElement('a');
@@ -169,7 +169,124 @@ fetch('assets/section1/info.json')
     .then(data => appendData(data))
     .catch(err => console.error('Error loading info:', err));
 
-fetch('assets/section1/social.json')
+fetch('assets/section1/icon.json')
     .then(response => response.json())
     .then(data => appendSocialLinks(data))
     .catch(err => console.error('Error loading social links:', err));
+    
+    document.addEventListener("DOMContentLoaded", function() {
+        fetch('assets/section2/info.json')
+            .then(response => response.json())
+            .then(data => {
+                document.querySelector('.topic').innerText = data.topic;
+                document.querySelector('.subtitle').innerText = data.subtitle;
+                document.querySelector('.text').innerText = data.text;
+                document.querySelector('.name').innerText = data.personal_details.name;
+                document.querySelector('.age').innerText = data.personal_details.age;
+                document.querySelector('.address').innerText = data.personal_details.address;
+                document.querySelector('.phone').innerText = data.personal_details.phone;
+                document.querySelector('.email').innerText = data.personal_details.email;
+                document.getElementById('download-cv').href = 'assets/section2/img/' + data.cv_link;
+                document.getElementById('profileImage').src = 'assets/section2/img/' + data.profile_image;
+            })
+            .catch(err => console.error('Error loading info:', err));
+    });
+    document.addEventListener("DOMContentLoaded", function() {
+        fetch('assets/section3/info.json')
+          .then(response => response.json())
+          .then(data => {
+            const programmingContainer = document.querySelector('.Programing');
+            const toolContainer = document.querySelector('.tool');
+            
+            
+            data.skilltitle.forEach((skill, index) => {
+              const skillElement = document.createElement('div');
+              skillElement.classList.add('row', 'align-items-center', 'chart');
+      
+              skillElement.innerHTML = `
+                <div class="col-2 text-center">
+                  <img src="assets/section3/img/${skill.icon}" platform="${skill.platform}" class="icon-skill">
+                </div>
+                <div class="col-10 skill-bar">
+                  <div class="skillbar clearfix" data-percent="${skill[' data-percent']}">
+                    <div class="skillbar-title"><span>${skill['skillbar-title']}</span></div>
+                    <div class="skillbar-bar" style="background-image: linear-gradient(to right, #ff4c4c, #ffca28);"></div>
+                    <div class="skill-bar-percent">${skill[' data-percent']}</div>
+                  </div>
+                </div>
+              `;
+      
+              if (index < 6) {
+                programmingContainer.appendChild(skillElement);
+              } else {
+                toolContainer.appendChild(skillElement);
+              }
+            });
+          })
+          .catch(err => console.error('Error loading info:', err));
+      });
+      
+      document.addEventListener("DOMContentLoaded", function() {
+        fetch('assets/section4/info.json')
+          .then(response => response.json())
+          .then(data => {
+            const titleElement = document.querySelector('.portfolio');
+            const descriptionElement = document.querySelector('.text-port');
+            const githubLinkElement = document.querySelector('.btn-primary');
+  
+            titleElement.textContent = data.portfolio.title;
+            descriptionElement.textContent = data.portfolio.description;
+            githubLinkElement.href = data.portfolio.githubLink;
+  
+            const portfolioWrappers = document.getElementById('portfolioWrappers');
+            const portfolioItemTemplate = document.getElementById('portfolio-item-template').content;
+            const modalTemplate = document.getElementById('modal-template').content;
+  
+            fetch('assets/section4/modal.json')
+              .then(response => response.json())
+              .then(modalData => {
+                // Create portfolio items
+                data.portfolio.wrappers.forEach(wrapper => {
+                  const portfolioItem = document.importNode(portfolioItemTemplate, true);
+                  const portfolioBox = portfolioItem.querySelector('.portfolio-box');
+                  portfolioBox.dataset.bsTarget = `#staticBackdrop${wrapper.id}`;
+                  portfolioItem.querySelector('img').src = `./asset/images/${wrapper.image}`;
+                  portfolioItem.querySelector('.text-subtitle-port').textContent = wrapper.title;
+                  portfolioItem.querySelector('.detail-port').textContent = wrapper.description;
+                  portfolioWrappers.appendChild(portfolioItem);
+                });
+  
+                // Create modals
+                modalData.modals.forEach(modal => {
+                  const modalClone = document.importNode(modalTemplate, true);
+                  const modalElement = modalClone.querySelector('.modal');
+                  modalElement.id = `staticBackdrop${modal.id}`;
+                  modalClone.querySelector('.modal-title').textContent = modal.title;
+                  if (modal.contentTitle) {
+                    modalClone.querySelector('.title').textContent = modal.contentTitle;
+                  }
+                  if (modal.contentDescription) {
+                    modalClone.querySelector('.text-detail').textContent = modal.contentDescription;
+                  }
+                  if (modal.link) {
+                    const link = modalClone.querySelector('.btn-port');
+                    link.href = modal.link;
+                  }
+                  const imageContainer = modalClone.querySelector('.row.g-0');
+                  modal.images.forEach(image => {
+                    const imageElement = document.createElement('div');
+                    imageElement.classList.add('col-12', 'col-md-4');
+                    imageElement.innerHTML = `
+                      <div class="portfolio-clone">
+                        <a class="portfolio-clone">
+                          <img src="./asset/images/${image}" alt="img-clone" class="img-responsive">
+                        </a>
+                      </div>
+                    `;
+                    imageContainer.appendChild(imageElement);
+                  });
+                  document.body.appendChild(modalClone);
+                });
+              });
+          });
+      });

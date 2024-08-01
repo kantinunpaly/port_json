@@ -1,0 +1,70 @@
+{
+  "modals": [
+    {
+      "id": "1",
+      "title": "UX/UI Design",
+      "contentTitle": "Full Service",
+      "contentDescription": "Website Full service ของ Envato เพื่อนำมาฝึกทักษะการออกแบบ UX/UI Design เป็นการฝึกในช่วงฝึกงานช่วงปิดภาคการศึกษา",
+      "images": [
+        "webpractice.png",
+        "iPad – 1.png",
+        "moblie.png"
+      ]
+    },
+    {
+      "id": "2",
+      "title": "UX/UI Design",
+      "images": [
+        "1.png",
+        "2.png",
+        "3.png"
+      ]
+    },
+    {
+      "id": "3",
+      "title": "UX/UI Design",
+      "contentTitle": "Application Food Delivery",
+      "contentDescription": "Application Food Delivery โปรเจ็กต์นี้จัดทำขึ้นเมื่อตอนฝึกงานช่วงปิดภาคเรียน โดยมี concept ให้แอปมีความเข้าถึงง่าย และมี CI เป็นของ แอปธนาคาร TTB",
+      "link": "https://xd.adobe.com/view/3623670b-b8c7-41cc-b13f-83a8af29c7af-6370/?fullscreen",
+      "images": [
+        "01 login_loading – 2.png",
+        "02 login.png",
+        "02.1 OTP.png",
+        "03.1 home.png"
+      ]
+    },
+    {
+      "id": "4",
+      "title": "UX/UI Design",
+      "images": [
+        "1.png",
+        "2.png",
+        "3.png",
+        "4.png",
+        "5.png"
+      ]
+    },
+    {
+      "id": "5",
+      "title": "UX/UI Design",
+      "images": [
+       "1.png",
+        "2.png",
+        "3.png",
+        "4.png",
+        "5.png"
+      ]
+    },
+    {
+      "id": "6",
+      "title": "UX/UI Design",
+      "images": [
+       "1.png",
+        "2.png",
+        "3.png",
+        "4.png",
+        "5.png"
+      ]
+    }
+  ]
+}

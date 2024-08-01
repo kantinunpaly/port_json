@@ -1,0 +1,70 @@
+{
+  "skilltitle": [
+    {
+      "skillbar-title": "HTML5",
+      " data-percent": "80%",
+      "platform": "HTML",
+      "icon": "html.svg"
+    },
+    {
+      "skillbar-title": "CSS",
+      " data-percent": "60%",
+      "platform": "css",
+      "icon": "css.svg"
+    },
+    {
+      "skillbar-title": "JavaScript",
+      " data-percent": "60%",
+      "platform": "js",
+      "icon": "js.svg"
+    },
+    {
+      "skillbar-title": "SQL",
+      " data-percent": "50%",
+      "platform": "sql",
+      "icon": "sql.svg"
+    },
+    {
+      "skillbar-title": "Python",
+      " data-percent": "40%",
+      "platform": "python",
+      "icon": "python.svg"
+    },
+    {
+      "skillbar-title": "Visual Studio Code",
+      " data-percent": "100%",
+      "platform": "vs",
+      "icon": "vs.svg"
+    },
+    {
+      "skillbar-title": "postgresql",
+      " data-percent": "40%",
+      "platform": "postgresql",
+      "icon": "postgresql.svg"
+    },
+    {
+      "skillbar-title": "Bootstrap",
+      " data-percent": "70%",
+      "platform": "bootstrap",
+      "icon": "bootstrap.svg"
+    },
+    {
+      "skillbar-title": "Canva",
+      " data-percent": "60%",
+      "platform": "canva",
+      "icon": "canva.svg"
+    },
+    {
+      "skillbar-title": "Figma",
+      " data-percent": "80%",
+      "platform": "figma",
+      "icon": "figma.svg"
+    },
+    {
+      "skillbar-title": "Adobe XD",
+      " data-percent": "60%",
+      "platform": "xd",
+      "icon": "xd.svg"
+    }
+  ]
+}

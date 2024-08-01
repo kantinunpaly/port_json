@@ -1,0 +1,14 @@
+{
+    "topic": "About Me",
+    "subtitle": "I'm junior web Developer",
+    "text": "Hello! My name is Kantinun, and I'm a passionate Front-End Developer. I am pursuing my degree in Computer Engineering at King Mongkut’s University of Technology Thonburi, with a keen interest in creating interactive and user-friendly web experiences.",
+    "personal_details": {
+        "name": "Kantinun Aunruean",
+        "age": "21 years",
+        "address": "Ratchaburi Mueang 70000",
+        "phone": "0656529763",
+        "email": "kantinun.aun@gmail.com"
+    },
+    "cv_link": "Cv_Kantinun.pdf",
+    "profile_image": "Profile.jpeg"
+}
