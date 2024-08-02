@@ -225,68 +225,176 @@ fetch('assets/section1/icon.json')
           })
           .catch(err => console.error('Error loading info:', err));
       });
-      
-      document.addEventListener("DOMContentLoaded", function() {
-        fetch('assets/section4/info.json')
-          .then(response => response.json())
-          .then(data => {
-            const titleElement = document.querySelector('.portfolio');
-            const descriptionElement = document.querySelector('.text-port');
-            const githubLinkElement = document.querySelector('.btn-primary');
-  
-            titleElement.textContent = data.portfolio.title;
-            descriptionElement.textContent = data.portfolio.description;
-            githubLinkElement.href = data.portfolio.githubLink;
-  
-            const portfolioWrappers = document.getElementById('portfolioWrappers');
-            const portfolioItemTemplate = document.getElementById('portfolio-item-template').content;
-            const modalTemplate = document.getElementById('modal-template').content;
-  
-            fetch('assets/section4/modal.json')
-              .then(response => response.json())
-              .then(modalData => {
-                // Create portfolio items
-                data.portfolio.wrappers.forEach(wrapper => {
-                  const portfolioItem = document.importNode(portfolioItemTemplate, true);
-                  const portfolioBox = portfolioItem.querySelector('.portfolio-box');
-                  portfolioBox.dataset.bsTarget = `#staticBackdrop${wrapper.id}`;
-                  portfolioItem.querySelector('img').src = `./asset/images/${wrapper.image}`;
-                  portfolioItem.querySelector('.text-subtitle-port').textContent = wrapper.title;
-                  portfolioItem.querySelector('.detail-port').textContent = wrapper.description;
-                  portfolioWrappers.appendChild(portfolioItem);
-                });
-  
-                // Create modals
-                modalData.modals.forEach(modal => {
-                  const modalClone = document.importNode(modalTemplate, true);
-                  const modalElement = modalClone.querySelector('.modal');
-                  modalElement.id = `staticBackdrop${modal.id}`;
-                  modalClone.querySelector('.modal-title').textContent = modal.title;
-                  if (modal.contentTitle) {
-                    modalClone.querySelector('.title').textContent = modal.contentTitle;
-                  }
-                  if (modal.contentDescription) {
-                    modalClone.querySelector('.text-detail').textContent = modal.contentDescription;
-                  }
-                  if (modal.link) {
-                    const link = modalClone.querySelector('.btn-port');
-                    link.href = modal.link;
-                  }
-                  const imageContainer = modalClone.querySelector('.row.g-0');
-                  modal.images.forEach(image => {
-                    const imageElement = document.createElement('div');
-                    imageElement.classList.add('col-12', 'col-md-4');
-                    imageElement.innerHTML = `
-                      <div class="portfolio-clone">
-                        <a class="portfolio-clone">
-                          <img src="./asset/images/${image}" alt="img-clone" class="img-responsive">
-                        </a>
-                      </div>
+      async function fetchJson(url) {
+        try {
+            let response = await fetch(url);
+            return await response.json();
+        } catch (error) {
+            console.error('Error fetching JSON:', error);
+        }
+    }
+    
+    document.addEventListener("DOMContentLoaded", function() {
+        fetchJson('assets/section4/info.json').then(data => {
+            const portfolio = data.portfolio;
+            
+            // Set the portfolio title and description
+            document.getElementById('portfolio-title').textContent = portfolio.title;
+            document.getElementById('portfolio-description').textContent = portfolio.description;
+            document.getElementById('github-link').setAttribute('href', portfolio.githubLink);
+    
+            // Populate portfolio items
+            const portfolioContainer = document.getElementById('portfolio-items');
+            portfolio.wrappers.forEach(item => {
+                const itemElement = document.createElement('div');
+                itemElement.classList.add('col-6', 'col-md-6', 'col-lg-4');
+                itemElement.innerHTML = `
+                    <div class="wrapper">
+                        <div class="portfolio-box" data-bs-toggle="modal" data-bs-target="#staticBackdrop${item.id}">
+                            <a class="portfolio-thumb">
+                                <img src="assets/section4/img/${item.image}" alt="img" class="img-responsive">
+                                <div class="content-port">
+                                    <p class="text-subtitle-port">${item.title}</p>
+                                    <p class="detail-port">${item.description}</p>
+                                    <p class="readmore">read more..</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                `;
+                portfolioContainer.appendChild(itemElement);
+            });
+        }).catch(err => console.error('Error loading portfolio info:', err));
+    
+        fetchJson('assets/section4/modal.json').then(modalData => {
+            const modalContainer = document.getElementById('modal-container');
+            
+            modalData.modals.forEach(modal => {
+                const modalElement = document.createElement('div');
+                modalElement.classList.add('modal', 'fade', 'modal-full');
+                modalElement.id = `staticBackdrop${modal.id}`;
+                modalElement.setAttribute('data-bs-backdrop', 'static');
+                modalElement.setAttribute('data-bs-keyboard', 'false');
+                modalElement.setAttribute('tabindex', '-1');
+                modalElement.setAttribute('aria-labelledby', `staticBackdropLabel${modal.id}`);
+                modalElement.setAttribute('aria-hidden', 'true');
+                modalElement.innerHTML = `
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title" id="staticBackdropLabel${modal.id}">${modal.title}</h1>
+                                <button type="button" class="btn-close me-2" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                ${modal.contentTitle ? `<h2 class="title">${modal.contentTitle}</h2>` : ''}
+                                ${modal.contentDescription ? `<p class="text-detail">${modal.contentDescription}</p>` : ''}
+                                ${modal.link ? `<div class="button-container" id="newtab-port"><a href="${modal.link}" class="btn-port">Example Content</a></div>` : ''}
+                                <div class="row g-0">
+                                    ${modal.images.map(image => `
+                                        <div class="col-12 col-md-4">
+                                            <div class="portfolio-clone">
+                                                <a class="portfolio-clone">
+                                                    <img src="assets/section4/gallery/${image}" alt="img-clone" class="img-responsive">
+                                                </a>
+                                            </div>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                modalContainer.appendChild(modalElement);
+            });
+        }).catch(err => console.error('Error loading modal data:', err));
+    });
+    
+    async function fetchJson(url) {
+        try {
+            let response = await fetch(url);
+            return await response.json();
+        } catch (error) {
+            console.error('Error fetching JSON:', error);
+        }
+    }
+
+
+
+
+
+
+
+    document.addEventListener("DOMContentLoaded", function() {
+        // Fetch and populate Education data
+        fetch('assets/section5/info.json')
+            .then(response => response.json())
+            .then(data => {
+                document.querySelector('.education-title').innerText = data.Education.title;
+    
+                const timelineItemsEd = data.Education['timeline-items-ed'];
+                const timelineItemsEdContainer = document.querySelector('.timeline-items-ed');
+    
+                timelineItemsEd.forEach(item => {
+                    const timelineItem = document.createElement('div');
+                    timelineItem.classList.add('timeline-item-ed');
+    
+                    timelineItem.innerHTML = `
+                        <div class="timeline-dot-ed"></div>
+                        <div class="timeline-date-ed">${item['timeline-date-ed']}</div>
+                        <div class="aos" data-aos="fade-up-right">
+                            <div class="timeline-content-ed">
+                                <div class="text-align-right">
+                                    <h4 class="education">${item.education}</h4>
+                                    <h5 class="education-name">${item['education-name']}</h5>
+                                    <h6 class="education-major">${item['education-major']}</h6>
+                                    <p class="education-grade">${item['education-grade']}</p>
+                                </div>
+                            </div>
+                        </div>
                     `;
-                    imageContainer.appendChild(imageElement);
-                  });
-                  document.body.appendChild(modalClone);
+    
+                    timelineItemsEdContainer.appendChild(timelineItem);
                 });
-              });
-          });
-      });
+            })
+            .catch(err => console.error('Error loading education info:', err));
+    
+        // Fetch and populate Experience data
+        fetch('assets/section5/infoex.json')
+            .then(response => response.json())
+            .then(data => {
+                document.querySelector('.experience-title').innerText = data.Experience.title;
+    
+                const timelineItemsEx = data.Experience['timeline-items-ed'];
+                const timelineItemsExContainer = document.querySelector('.timeline-items');
+    
+                timelineItemsEx.forEach(item => {
+                    const timelineItem = document.createElement('div');
+                    timelineItem.classList.add('timeline-item');
+    
+                    timelineItem.innerHTML = `
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-date">${item['timeline-date-ed']}</div>
+                        <div class="aos" data-aos="fade-up-left">
+                            <div class="timeline-content">
+                                <div class="text-align-right">
+                                    <h4 class="experience">${item['experience-topic']}</h4>
+                                    <p>${item['experience-detail']}</p>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+    
+                    timelineItemsExContainer.appendChild(timelineItem);
+                });
+            })
+            .catch(err => console.error('Error loading experience info:', err));
+    });
+    
+    
+
+
+
+

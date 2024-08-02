@@ -1,0 +1,30 @@
+{
+    "Experience": {
+    "title": "Experience",
+    "timeline-items-ed": [
+      {
+        "id": "1",
+        "timeline-date-ed": "2024",
+        "experience-topic": "Human Computer Interaction",
+        "experience-detail": "Design an interface for the dairy website.  (Figma)"
+      },
+      {  "id": "2",
+      "timeline-date-ed": "2023",
+      "experience-topic": "Database & Software Engineer",
+      "experience-detail": "Design and build an interface for a coffee shop POS system.(Canva,HTML,CSS) <br /> Design database for a coffee shop POS system.(SQL,PostgreSQL,django)"
+      },
+      {
+        "id": "3",
+      "timeline-date-ed": "2022",
+      "experience-topic": "Algorithms",
+      "experience-detail": "Solve the problem of traveling to different cities, considering money and time constraints with algorithms such as GreedyAlgorithm and Brute Force Algorithm. (Python)"
+      },
+      {
+        "id": "4",
+      "timeline-date-ed": "2021",
+      "experience-topic": "Activities",
+      "experience-detail": " Member of the Faculty of Engineering Student Association, 2021-2022. I have organized events within various faculties, such as the Wai Khru Ceremony and orientation activities."
+      }
+    ]
+  }
+}
