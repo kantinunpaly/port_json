@@ -320,5 +320,81 @@ fetch('assets/section1/icon.json')
             console.error('Error fetching JSON:', error);
         }
     }
+
+
+
+
+
+
+
+    document.addEventListener("DOMContentLoaded", function() {
+        // Fetch and populate Education data
+        fetch('assets/section5/info.json')
+            .then(response => response.json())
+            .then(data => {
+                document.querySelector('.education-title').innerText = data.Education.title;
+    
+                const timelineItemsEd = data.Education['timeline-items-ed'];
+                const timelineItemsEdContainer = document.querySelector('.timeline-items-ed');
+    
+                timelineItemsEd.forEach(item => {
+                    const timelineItem = document.createElement('div');
+                    timelineItem.classList.add('timeline-item-ed');
+    
+                    timelineItem.innerHTML = `
+                        <div class="timeline-dot-ed"></div>
+                        <div class="timeline-date-ed">${item['timeline-date-ed']}</div>
+                        <div class="aos" data-aos="fade-up-right">
+                            <div class="timeline-content-ed">
+                                <div class="text-align-right">
+                                    <h4 class="education">${item.education}</h4>
+                                    <h5 class="education-name">${item['education-name']}</h5>
+                                    <h6 class="education-major">${item['education-major']}</h6>
+                                    <p class="education-grade">${item['education-grade']}</p>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+    
+                    timelineItemsEdContainer.appendChild(timelineItem);
+                });
+            })
+            .catch(err => console.error('Error loading education info:', err));
+    
+        // Fetch and populate Experience data
+        fetch('assets/section5/infoex.json')
+            .then(response => response.json())
+            .then(data => {
+                document.querySelector('.experience-title').innerText = data.Experience.title;
+    
+                const timelineItemsEx = data.Experience['timeline-items-ed'];
+                const timelineItemsExContainer = document.querySelector('.timeline-items');
+    
+                timelineItemsEx.forEach(item => {
+                    const timelineItem = document.createElement('div');
+                    timelineItem.classList.add('timeline-item');
+    
+                    timelineItem.innerHTML = `
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-date">${item['timeline-date-ed']}</div>
+                        <div class="aos" data-aos="fade-up-left">
+                            <div class="timeline-content">
+                                <div class="text-align-right">
+                                    <h4 class="experience">${item['experience-topic']}</h4>
+                                    <p>${item['experience-detail']}</p>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+    
+                    timelineItemsExContainer.appendChild(timelineItem);
+                });
+            })
+            .catch(err => console.error('Error loading experience info:', err));
+    });
     
     
+
+
+
+

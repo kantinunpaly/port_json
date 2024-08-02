@@ -37,14 +37,14 @@ body{
 
 }
 
-h2.title2 {
+h2.title {
      font-family: var(--title-font);
      font-size: var(--title-size);
      font-weight: bolder;
      color: var(--bg-main-color);
 }
 @media (max-width: 992px) {
-    h2.title2 {
+    h2.title {
         font-family: var(--title-font);
         font-size: var(--subtitle-size);
         font-weight: bolder;
@@ -52,7 +52,7 @@ h2.title2 {
    }
 }
 @media (max-width: 576px) {
-    h2.title2
+    h2.title
     
     
     {
